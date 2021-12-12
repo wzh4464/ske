@@ -8,7 +8,9 @@ cellArc = {};
 for i = 1 : sizex
     arc_label = arcpoints(i,1);
     if arc~=arc_label
-        cellArc{arc} = F;
+        if arc > 0
+            cellArc{arc} = F;
+        end
         arc = arc_label;
         new_label = new_label+1;
         F = [];
