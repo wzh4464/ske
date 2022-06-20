@@ -1,4 +1,4 @@
-function d = Distance(a,b)
+function d = Correlation(a,b)
     x = a;
     x(3:4) = x(3:4);
     x(5) = x(5);
