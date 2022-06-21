@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="752px" height="525px" version="1.1"
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- 2 -->
+<ellipse transform="translate(190.539754 165.245604) rotate(75.230349)" rx="80.828746" ry="53.709951" stroke="red" fill="none" stroke-width="1" />
+<!-- 5 -->
+<path d="M 275.706483,350.322089 A80.689944,53.622508 0.049095 1,1 292.213174,338.211923" fill="none" stroke ="red" stroke-width="1" />
+</svg>
