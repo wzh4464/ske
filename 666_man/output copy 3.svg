@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="752px" height="525px" version="1.1"
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- 4 -->
+<path d="M 289.773999,274.682460 A124.959310,82.997258 -14.863277 1,1 273.875822,352.064216" fill="none" stroke ="red" stroke-width="1" />
+<!-- 12 -->
+<ellipse transform="translate(593.953653 443.009308) rotate(-0.024117)" rx="80.142090" ry="52.936070" stroke="red" fill="none" stroke-width="1" />
+<!-- 21 -->
+<path d="M 525.746744,474.267976 A61.432061,50.013683 0.373617 0,1 553.499157,395.768588" fill="none" stroke ="red" stroke-width="1" />
+<!-- 24 -->
+<path d="M 601.056102,388.716040 A91.644671,91.644671 0.000000 0,1 663.072243,412.925285" fill="none" stroke ="red" stroke-width="1" />
+<!-- 25 -->
+<path d="M 665.407177,470.402948 A85.958289,85.958289 0.000000 0,1 609.036547,496.718326" fill="none" stroke ="red" stroke-width="1" />
+<!-- 27 -->
+<path d="M 675.512343,435.030953 A49.973252,49.973252 0.000000 0,1 669.769236,464.901404" fill="none" stroke ="red" stroke-width="1" />
+<!-- <line x1="291.952037" y1="339.113124" x2="276.980232" y2="350.151367"  fill="none" stroke ="blue" stroke-width="1" />
+29
+<line x1="278.518067" y1="351.524287" x2="294.564972" y2="339.587343"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="503.469989" y1="201.160204" x2="514.538033" y2="201.663321"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="124.333722" y1="398.005793" x2="139.319572" y2="392.963737"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="554.647345" y1="395.074047" x2="574.615184" y2="389.948748"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="575.445490" y1="389.707554" x2="599.469391" y2="388.055016"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="225.900041" y1="485.515859" x2="201.712907" y2="495.040654"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="148.517071" y1="496.439765" x2="134.508573" y2="492.469749"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="133.801156" y1="492.858156" x2="117.227128" y2="485.081565"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="165.444575" y1="498.132003" x2="149.479662" y2="496.731913"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="200.589271" y1="495.050372" x2="189.555166" y2="496.840110"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="188.497470" y1="497.850401" x2="177.498043" y2="497.770982"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="293.982936" y1="66.521771" x2="294.434861" y2="56.497063"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="296.331982" y1="75.544510" x2="294.220532" y2="67.574034"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="547.636655" y1="489.282441" x2="529.324197" y2="477.779884"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="670.309304" y1="421.580551" x2="676.084630" y2="435.253049"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="307.769223" y1="31.927047" x2="321.396581" y2="23.335955"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="322.346567" y1="23.006488" x2="333.511024" y2="19.535458"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="184.411464" y1="388.967890" x2="203.485401" y2="392.577153"  fill="none" stroke ="blue" stroke-width="1" />
+<line x1="204.613710" y1="393.177781" x2="218.632369" y2="398.124906"  fill="none" stroke ="blue" stroke-width="1" /> -->
+</svg>

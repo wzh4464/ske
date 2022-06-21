@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="752px" height="525px" version="1.1"
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- 1 -->
+<path d="M 591.351399,147.613766 A57.730911,33.069894 -17.394405 0,1 513.116645,201.598260" fill="none" stroke ="red" stroke-width="1" />
+<!-- 3 -->
+<path d="M 593.023309,163.454359 A80.850939,53.604171 -0.182207 1,1 516.668468,203.269327" fill="none" stroke ="red" stroke-width="1" />
+<!-- 7 -->
+<path d="M 487.165574,97.760569 A79.256347,50.271294 0.244945 0,1 592.305827,145.990315" fill="none" stroke ="red" stroke-width="1" />
+<!-- 8 -->
+<path d="M 502.041799,199.946081 A71.704566,51.483752 1.296997 0,1 487.246838,98.428815" fill="none" stroke ="red" stroke-width="1" />
+<!-- 19 -->
+<path d="M 456.093448,187.296363 A44.266074,44.266074 0.000000 0,1 439.165053,122.419664" fill="none" stroke ="red" stroke-width="1" />
+<!-- 23 -->
+<path d="M 576.024427,113.119598 A45.188958,45.188958 0.000000 0,1 595.334347,149.976814" fill="none" stroke ="red" stroke-width="1" />
+</svg>

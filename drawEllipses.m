@@ -19,15 +19,16 @@
 % http://www.ntu.edu.sg/
 
 
-function [] = drawEllipses(ellipses_para,im)
+function [] = drawEllipses(ellipses_para,src,k)
+im=imread(src);
 if ~isempty(im)
 figure;
 imshow(im); %show image
 % imshow(im,'border','tight','initialmagnification','fit'); %show image
 size_im = size(im);
-% hold on;
+hold on;
 else
-%     hold on;
+    hold on;
 end
 
 th=0:pi/180:2*pi;
@@ -45,5 +46,6 @@ end
 if ~isempty(im)
 axis on; set(gca,'XTick',[],'YTick',[]);axis ij;axis equal;axis([0 size_im(2) 0 size_im(1)]);
 end
-
+saveas(gcf,'data/elli'+string(k)+'.jpg');
+hold off
 end
