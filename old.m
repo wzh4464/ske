@@ -4,7 +4,7 @@ imshow(sourceImg)
 [rows, cols] = size(gray)
 disp('source_success')
 
-arcpoints = load ('ske\im9933arcpoints.txt','-ascii');
+arcpoints = load ('im9933arcpoints.txt','-ascii');
 [arcpointsizex,~] = size(arcpoints);
 arc = 0;
 new_label = 0;
@@ -63,7 +63,7 @@ output = sol;
 cor = zeros(out_num);
 for i = 1 : out_num
     for j = 1 : out_num
-        cor(i,j) = Distance(output(:,i),output(:,j));
+        cor(i,j) = Correlation(output(:,i),output(:,j));
     end
 end
 [u,~,~]=svd(cor);
