@@ -1,13 +1,18 @@
 %% loading
 clc;
-load("/home/wu/codes/ELSDc/out_ellipse.txt");
+load("sourceimg/out_ellipse.txt");
+load("sim.mat","sim");
+sourceimg = "sourceimg/-1050160835.jpg.pgm";
 output = out_ellipse(:,6:10);
 out_num = size(output,1);
 cor = zeros(out_num);
 for i = 1 : out_num
     for j = 1 : out_num
-        cor(i,j) = Correlation(output(i,:),output(j,:));
+        cor(i,j) = Correlation(output(i,:),output(j,:),100);
     end
+end
+for i = 1 : out_num
+    out_ellipse(i,1) = i;
 end
 
 %% Yan's own word
