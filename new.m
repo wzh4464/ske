@@ -54,37 +54,37 @@
 
 %% Yan's own word
 
-% [u,s,~]=svd(cor);
-% R = (u*s^(1/2));
-% % R=R(1:3,:);
-% sums = NaN(1,50);
-% for j = 2:10 % kmeans 的 k
-%     [ind,~,sumd] = kmeans(R,j);
-%     [~,I]=sort(ind);
-%     newcor = cor(I,I);
-%     img=mat2gray(newcor);%将数值矩阵X转换为灰度图像
-%     %     C(j)={M};
-%     %     id(j)={ind};
-%     sums(j) = sum(sumd);
-%     %     disp(sums(j))
-%     %     disp(j)
-%     %     imwrite(img,"data/chess"+string(j)+'.jpg')
-%     tmp = zeros(j,5);
-%     %     cnt = zeros(j);
-%     %     % average: very wrong
-%     %     for i = 1:size(output,1)
-%     %         tmp(ind(i),:) = tmp(ind(i),:)+output(i,:);
-%     %         cnt(ind(i)) = cnt(ind(i)) + 1;
-%     %     end
-%     %     for i = 1:j
-%     %         tmp(i,:) = tmp(i,:)/cnt(i);
-%     %     end
-%     for i = 1:size(output,1)
-%         tmp(ind(i),:) = output(i,:);
-%     end
-%     drawEllipses(tmp',sourceimg,j)
-% end
-% plot(sums)
+[u,s,~]=svd(cor);
+R = (u*s^(1/2));
+% R=R(1:3,:);
+sums = NaN(1,50);
+for j = 10:4:60 % kmeans 的 k
+    [ind,~,sumd] = kmeans(R,j);
+    [~,I]=sort(ind);
+    newcor = cor(I,I);
+    img=mat2gray(newcor);%将数值矩阵X转换为灰度图像
+    %     C(j)={M};
+    %     id(j)={ind};
+    sums(j) = sum(sumd);
+    %     disp(sums(j))
+    %     disp(j)
+    %     imwrite(img,"data/chess"+string(j)+'.jpg')
+    tmp = zeros(j,5);
+    %     cnt = zeros(j);
+    %     % average: very wrong
+    %     for i = 1:size(output,1)
+    %         tmp(ind(i),:) = tmp(ind(i),:)+output(i,:);
+    %         cnt(ind(i)) = cnt(ind(i)) + 1;
+    %     end
+    %     for i = 1:j
+    %         tmp(i,:) = tmp(i,:)/cnt(i);
+    %     end
+    for i = 1:size(output,1)
+        tmp(ind(i),:) = output(i,:);
+    end
+    drawEllipses(tmp',sourceimg,j)
+end
+plot(sums)
 
 %% simulation to validate co-cluster
 % j = 3;
@@ -140,7 +140,7 @@ for i = 1:j
     tmp(i,:) = tmp(i,:)/cnt(i);
 end
 %%     figure
-drawtemp = tmp([1,7,8],:);
+drawtemp = tmp([1,2,4,5,11,13,16,17,19,21,30,31,34,35,38,41,44],:);
 drawEllipses(drawtemp',sourceimg ,j)
 
 
