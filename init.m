@@ -1,8 +1,8 @@
 %% loading
 clc;
-load("sourceimg/out_ellipse.txt");
-load("sim.mat","sim");
-sourceimg = "sourceimg/-1050160835.jpg.pgm";
+load("sourceimg/043_0011/out_ellipse.txt");
+% load("sim.mat","sim");
+sourceimg = "sourceimg/Prasad_plus/043_0011.jpg";
 output = out_ellipse(:,6:10);
 out_num = size(output,1);
 cor = zeros(out_num);
