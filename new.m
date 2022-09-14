@@ -140,7 +140,7 @@ for i = 1:j
     tmp(i,:) = tmp(i,:)/cnt(i);
 end
 %%     figure
-drawtemp = tmp([1,2,4,5,11,13,16,17,19,21,30,31,34,35,38,41,44],:);
+drawtemp = tmp([1,4,5,11,13,17,19,21,31,34,35,38,44],:);
 drawEllipses(drawtemp',sourceimg ,j)
 
 
