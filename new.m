@@ -182,7 +182,7 @@ for i = 1:size(out_ellipse,1)
     %     arc_len(j) = abs(out_ellipse(j,8) * out_ellipse(j,9) * (out_ellipse(j,12) - out_ellipse(j,11)));
 end
 
-DM = distanceMatrix(out_ellipse(:,:),point,ellipse_point,arc_len)
+DM = distanceMatrix(out_ellipse(:,:),point,ellipse_point,arc_len);
 
 dm_group={};
 for i = 1:group_num
