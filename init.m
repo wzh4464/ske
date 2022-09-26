@@ -1,8 +1,15 @@
 %% loading
+clear;
 clc;
-load("sourceimg/043_0011/out_ellipse.txt");
+
+datapath = "ELSDc/Dataset4_mydataset/";
+filename = "043_0011";
+
+out_ellipse=load(datapath + filename + "_out_ellipse.txt");
+
 % load("sim.mat","sim");
-sourceimg = "sourceimg/Prasad_plus/043_0011.jpg";
+sourceimg = datapath + filename +".jpg";
+img = imread(sourceimg);
 output = out_ellipse(:,6:10);
 out_num = size(output,1);
 cor = zeros(out_num);
@@ -11,9 +18,38 @@ for i = 1 : out_num
         cor(i,j) = Correlation(output(i,:),output(j,:),100);
     end
 end
-for i = 1 : out_num
-    out_ellipse(i,1) = i;
+% for i = 1 : out_num
+%     out_ellipse(i,1) = i;
+% end
+
+
+%% read points from pgm
+
+pgmname = datapath + filename + "_reg.pgm";
+pgmmat = transpose(getreg(pgmname));
+yxsize = readyxsize(pgmname);
+rows = yxsize(2);
+cols = yxsize(1);
+max_label = pgmMaxLabel(pgmname); % 最大meaningful label for elli
+
+pgmmat = transpose(reshape(pgmmat,[cols,rows]));
+
+% imshow(pgmmat)
+
+% arcpoints{i,1} 是点的集合, {i,2}是点的数目
+arc_points = cell(max_label,2);
+for i=1:rows
+    for j=1:cols
+        if pgmmat(i,j)
+            arc_points{pgmmat(i,j),1}=[arc_points{pgmmat(i,j),1};i,j];
+        end
+    end
 end
+for i=1:max_label
+    arc_points{i,2} = size(arc_points{i,1},1);
+end
+
+
 
 %% Yan's own word
 

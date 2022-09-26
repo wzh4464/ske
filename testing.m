@@ -76,3 +76,15 @@ end
 
 diff = out_ellipse(:,14:15)-out_ellipse(:,11:12);
     
+%%
+
+e_1 = fitEllipse(arc_points{1,1}(:,1),arc_points{1,1}(:,2));
+
+
+r1 = Residuals_ellipse(arc_points{1,1},e_1);
+r2 = Residuals_ellipse(arc_points{1,1},output(1,:));
+
+drawEllipseandShow(e_1',sourceimg)
+%%
+hold on
+plot(arc_points{1,1}','g', 'LineWidth',2)
