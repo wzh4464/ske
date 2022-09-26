@@ -19,8 +19,8 @@ x = x(:);
 y = y(:);
 %}
 
-x = X(:);%change session 1
-y = Y(:);
+y = X(:);%change session 1
+x = Y(:);
 % Build design matrix
 D = [ x.*x x.*y y.*y x y ones(size(x)) ];
 % Build scatter matrix

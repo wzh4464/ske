@@ -22,10 +22,12 @@ end
 %     out_ellipse(i,1) = i;
 % end
 
+% name of arcs
+arc_names = out_ellipse(:,1);
 
 %% read points from pgm
 
-pgmname = datapath + filename + "_reg.pgm";
+pgmname = datapath + filename + "labels.pgm";
 pgmmat = transpose(getreg(pgmname));
 yxsize = readyxsize(pgmname);
 rows = yxsize(2);
@@ -34,6 +36,10 @@ max_label = pgmMaxLabel(pgmname); % 最大meaningful label for elli
 
 pgmmat = transpose(reshape(pgmmat,[cols,rows]));
 
+
+% figure
+% imshow(sourceimg)
+% figure
 % imshow(pgmmat)
 
 % arcpoints{i,1} 是点的集合, {i,2}是点的数目
