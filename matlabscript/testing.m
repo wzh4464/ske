@@ -1,3 +1,36 @@
+%% new test
+
+elli1 = output(1,:);
+elli2 = output(23,:);
+
+data = zeros(2,5);
+data(1,:) = elli1;
+data(2,:) = elli2;
+
+rec = zeros(2:4:2);
+for i = 1:2
+    rotatemt = [cos(data(i,5)),-sin(data(i,5));sin(data(i,5)),cos(data(i,5))];
+    rec(:,1,i) = [rotatemt,data(i,1:2)']*[data(i,3:4)';1];
+    rec(:,2,i) = [rotatemt,data(i,1:2)']*[diag([-1,1])*data(i,3:4)';1];
+    rec(:,3,i) = [rotatemt,data(i,1:2)']*[diag([-1,-1])*data(i,3:4)';1];
+    rec(:,4,i) = [rotatemt,data(i,1:2)']*[diag([1,-1])*data(i,3:4)';1];
+end
+rect1 = polyshape(rec(1,:,1)',rec(2,:,1)');
+rect2 = polyshape(rec(1,:,2)',rec(2,:,2)');
+
+in = intersect(rect1,rect2);
+un = union(rect1,rect2);
+
+figure
+imshow(sourceimg)
+% hold on
+% plot(polyshape(rec(1,:,1)',rec(2,:,1)'))
+% hold on
+% plot(polyshape(rec(1,:,2)',rec(2,:,2)'))
+hold on
+plot(in)
+hold on
+%% old test
 % n = 27;
 % a = out_ellipse(n, 8);
 % b = out_ellipse(n, 9);
@@ -39,7 +72,7 @@
 % figure;
 % scatter(set(:,1),set(:,2));
 % axis equal;
-
+%
 % for i = 1:size(out_ellipse,1)
 %     point{i} = arcpoints(out_ellipse(i,:));
 % end
@@ -62,20 +95,20 @@
 % dm = DM(group,group)
 % %%
 % DM
-
-for n=1:27
-    x0 = out_ellipse(n, 6);
-    y0 = out_ellipse(n, 7);
-    x1 = out_ellipse(n, 2);
-    y1 = out_ellipse(n, 3);
-    x2 = out_ellipse(n, 4);
-    y2 = out_ellipse(n, 5);
-    out_ellipse(n,14) = atan2((y1-y0),(x1-x0));
-    out_ellipse(n,15) = atan2((y2-y0),(x2-x0));
-end
-
-diff = out_ellipse(:,14:15)-out_ellipse(:,11:12);
-
+%
+% for n=1:27
+%     x0 = out_ellipse(n, 6);
+%     y0 = out_ellipse(n, 7);
+%     x1 = out_ellipse(n, 2);
+%     y1 = out_ellipse(n, 3);
+%     x2 = out_ellipse(n, 4);
+%     y2 = out_ellipse(n, 5);
+%     out_ellipse(n,14) = atan2((y1-y0),(x1-x0));
+%     out_ellipse(n,15) = atan2((y2-y0),(x2-x0));
+% end
+% 
+% diff = out_ellipse(:,14:15)-out_ellipse(:,11:12);
+% 
 %%
 k=find(arc_names==1);
 mansol = fitEllipse(arc_points{k,1}(:,1),arc_points{k,1}(:,2));
