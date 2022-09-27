@@ -1,2 +1,2 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<Info Type="StartUp" Visible="0" Icon="" File="init.m" Name="init"/>
+<Info Type="StartUp" Visible="0" Icon="" File="matlabscript/init.m" Name="init"/>
