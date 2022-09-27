@@ -42,20 +42,34 @@ pgmmat = transpose(reshape(pgmmat,[cols,rows]));
 % figure
 % imshow(pgmmat)
 
-% arcpoints{i,1} 是点的集合, {i,2}是点的数目
-arc_points = cell(max_label,2);
-for i=1:rows
-    for j=1:cols
-        if pgmmat(i,j)
-            arc_points{pgmmat(i,j),1}=[arc_points{pgmmat(i,j),1};i,j];
-        end
-    end
-end
-for i=1:max_label
-    arc_points{i,2} = size(arc_points{i,1},1);
+% arcpoints{i,1} 是点的集合, {i,2}label_meaningful
+% arc_points = cell(max_label,2);
+% for i=1:rows
+%     for j=1:cols
+%         if pgmmat(i,j)
+%             arc_points{pgmmat(i,j),1}=[arc_points{pgmmat(i,j),1};i,j];
+%         end
+%     end
+% end
+% for i=1:max_label
+%     arc_points{i,2} = size(arc_points{i,1},1);
+% end
+
+mat = zeros(rows,cols,out_num);
+mat = imbinarize(mat);
+for i=1:out_num
+    pureLabel = zeros(rows,cols);
+    pureLabel(pgmmat==arc_names(i)) = 1;
+    mat(:,:,i) = imbinarize(pureLabel);
 end
 
+arc_points = cell(out_num,2);
 
+for i=1:out_num
+    [x,y] = find(mat(:,:,i)==1);
+    arc_points{i,1} = [x,y];
+    arc_points{i,2} = arc_names(i);
+end
 
 %% Yan's own word
 
