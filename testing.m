@@ -77,23 +77,26 @@ end
 diff = out_ellipse(:,14:15)-out_ellipse(:,11:12);
 
 %%
-k=23;
-mansol = fitEllipse(arc_points{arc_names(k),1}(:,1),arc_points{arc_names(k),1}(:,2));
-ell_=fit_ellipse(arc_points{arc_names(k),1}(:,2),arc_points{arc_names(k),1}(:,1));
+k=find(arc_names==1);
+mansol = fitEllipse(arc_points{k,1}(:,1),arc_points{k,1}(:,2));
+ell_=fit_ellipse(arc_points{k,1}(:,1),arc_points{k,1}(:,2));
 % ell3 = [ell_.X0_in,ell_.Y0_in,ell_.long_axis,ell_.short_axis,ell_.phi];
-ell3 = [ell_.X0_in,ell_.Y0_in,ell_.a,ell_.b,ell_.phi];
+ell3 = [ell_.Y0_in,ell_.X0_in,ell_.b,ell_.a,ell_.phi];
 
-r1 = Residuals_ellipse(arc_points{arc_names(k),1},mansol);
-r2 = Residuals_ellipse(arc_points{arc_names(k),1},output(arc_names(k),:));
-
-drawEllipseandShow(mansol',sourceimg)
-drawEllipseandShow(output(arc_names(k),:)',sourceimg)
-drawEllipseandShow(ell3',sourceimg)
+r1 = Residuals_ellipse(arc_points{k,1},mansol);
+r2 = Residuals_ellipse(arc_points{k,1},output(k,:));
+r3 = Residuals_ellipse(arc_points{k,1},ell3);
+% figure
+drawEllipseandShow(mansol',sourceimg);
+% figure
+drawEllipseandShow(output(k,:)',sourceimg);
+% figure
+drawEllipseandShow(ell3',sourceimg);
 figure
 imshow(sourceimg);
 hold on
-scatter(arc_points{arc_names(k),1}(:,2),arc_points{arc_names(k),1}(:,1),5,'green');
-
+scatter(arc_points{k,1}(:,2),arc_points{k,1}(:,1),5,'green','filled','square');
+hold off
 
 %%
 

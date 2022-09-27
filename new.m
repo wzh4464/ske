@@ -2,23 +2,6 @@
 % @Date:   2022-06-26 14:42:14
 % @Last Modified by:   WU Zihan
 % @Last Modified time: 2022-07-04 20:43:01
-%% loading
-% clc;
-% % clear all;
-% % load("/home/wu/codes/cocluster_matlab/out_ellipse_666.txt");
-% load("/home/wu/codes/ELSDc/out_ellipse.txt");
-% % tmp = out_ellipse(:,6:12);
-% % output = [out_ellipse(:,6:10),abs(out_ellipse(:,12)-out_ellipse(:,11))];
-% output = out_ellipse(:,6:10);
-% % drawEllipses(output',"666.jpg",0)
-% % ind = cocluster()
-% out_num = size(output,1);
-% cor = zeros(out_num);
-% for i = 1 : out_num
-%     for j = 1 : out_num
-%         cor(i,j) = Correlation(output(i,:),output(j,:));
-%     end
-% end
 
 %% R decomposition
 % [u,s,~]=svd(cor);
@@ -129,7 +112,7 @@ img=mat2gray(newcor);%将数值矩阵X转换为灰度图像
 sums(j) = sum(sumd);
 disp(sums(j))
 disp(j)
-imwrite(img,"data/chess"+string(j)+'.jpg')
+% imwrite(img,"data/chess"+string(j)+'.jpg')
 tmp = zeros(j,5);
 cnt = zeros(j);
 for i = 1:size(output,1)
