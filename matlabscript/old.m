@@ -63,7 +63,7 @@ output = sol;
 cor = zeros(out_num);
 for i = 1 : out_num
     for j = 1 : out_num
-        cor(i,j) = Correlation(output(:,i),output(:,j));
+        cor(i,j) = iou(output(:,i),output(:,j));
     end
 end
 [u,~,~]=svd(cor);
