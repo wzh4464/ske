@@ -112,9 +112,9 @@ hold on
 %%
 k=find(arc_names==1);
 mansol = fitEllipse(arc_points{k,1}(:,1),arc_points{k,1}(:,2));
-ell_=fit_ellipse(arc_points{k,1}(:,1),arc_points{k,1}(:,2));
+ell3 =fit_ellipse(arc_points{k,1}(:,1),arc_points{k,1}(:,2));
 % ell3 = [ell_.X0_in,ell_.Y0_in,ell_.long_axis,ell_.short_axis,ell_.phi];
-ell3 = [ell_.Y0_in,ell_.X0_in,ell_.b,ell_.a,ell_.phi];
+% ell3 = [ell_.Y0_in,ell_.X0_in,ell_.b,ell_.a,ell_.phi];
 
 r1 = Residuals_ellipse(arc_points{k,1},mansol);
 r2 = Residuals_ellipse(arc_points{k,1},output(k,:));
@@ -148,13 +148,3 @@ for i = 1:out_num
     hold off
 end
 
-%%
-i=23;
-figure
-
-imshow(sourceimg)
-hold on
-scatter(arc_points{arc_names(i),1}(:,2),arc_points{arc_names(i),1}(:,1),5,'green')
-
-ell_=fit_ellipse(arc_points{arc_names(i),1}(:,2),arc_points{arc_names(i),1}(:,1));
-ell3 = [ell_.X0_in,ell_.Y0_in,ell_.long_axis,ell_.short_axis,ell_.phi];
