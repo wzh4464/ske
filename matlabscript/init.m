@@ -71,6 +71,10 @@ for i=1:out_num
     arc_points{i,2} = arc_names(i);
 end
 
+resi = zeros(out_num,1);
+for i = 1:out_num
+    resi(i) = Residuals_ellipse(arc_points{i,1},output(i,:));
+end
 %% Yan's own word
 
 % [u,s,~]=svd(cor);

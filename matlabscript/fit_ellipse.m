@@ -156,7 +156,8 @@ a = sum(X)/(X'*X);
 
 % check for warnings
 if ~isempty( lastwarn )
-    disp( 'stopped because of a warning regarding matrix inversion' );
+%     lastwarn
+    error( 'stopped because of a warning regarding matrix inversion' );
     ellipse_t = [];
     return
 end
@@ -189,8 +190,8 @@ end
 test = a*c;
 switch (1)
 case (test>0),  status = '';
-case (test==0), status = 'Parabola found';  warning( 'fit_ellipse: Did not locate an ellipse' );
-case (test<0),  status = 'Hyperbola found'; warning( 'fit_ellipse: Did not locate an ellipse' );
+case (test==0), status = 'Parabola found';  error( 'fit_ellipse: Did not locate an ellipse' );
+case (test<0),  status = 'Hyperbola found'; error( 'fit_ellipse: Did not locate an ellipse' );
 end
 
 % if we found an ellipse return it's data
@@ -239,7 +240,7 @@ else
 %         'long_axis',[],...
 %         'short_axis',[],...
 %         'status',status );
-    ellipse_array = [];
+    ellipse_array = [nan,nan,nan,nan,nan];
 end
 
 % check if we need to plot an ellipse with it's axes.

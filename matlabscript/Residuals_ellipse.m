@@ -1,4 +1,10 @@
+% @Author: WU Zihan
+% @Date:   2022-09-26 16:33:39
+% @Last Modified by:   WU Zihan
+% @Last Modified time: 2022-09-29 19:05:28
 function [RSS, XYproj] = Residuals_ellipse(XY,ParG)
+%! changed to adapt coordinates of image
+
 %
 %   Projecting a given set of points onto an ellipse
 %   and computing the distances from the points to the ellipse
@@ -24,7 +30,13 @@ function [RSS, XYproj] = Residuals_ellipse(XY,ParG)
 %   It takes 4-5 iterations per point, on average.
 
 
-Center = ParG(1:2);   Axes = ParG(3:4);  Angle = ParG(5);
+Center(1) = ParG(2);
+Center(2) = ParG(1);
+
+Axes(1) = ParG(4);
+Axes(2) = ParG(3);
+
+Angle = ParG(5);
 
 n = size(XY,1);
 XYproj = zeros(n,2);
@@ -127,6 +139,7 @@ end % end the main loop
 XYproj = XYproj*Q';
 XYproj = [XYproj(:,1)+Center(1) XYproj(:,2)+Center(2)];
 RSS = norm(XY-XYproj,'fro')^2;
+RSS = RSS/size(XY,1);
 end   % Residuals_ellipse
 
 %     Copyright (c) 2010, Hui Ma
