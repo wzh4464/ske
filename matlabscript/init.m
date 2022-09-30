@@ -3,12 +3,12 @@ clear;
 clc;
 
 datapath = "ELSDc/Dataset4_mydataset/";
-filename = "043_0011";
+filename = "666";
 
 out_ellipse=load(datapath + filename + "_out_ellipse.txt");
 
 % load("sim.mat","sim");
-sourceimg = datapath + filename +".jpg";
+sourceimg = datapath + filename +".pgm";
 img = imread(sourceimg);
 output = out_ellipse(:,6:10);
 out_num = size(output,1);
@@ -27,7 +27,7 @@ arc_names = out_ellipse(:,1);
 
 %% read points from pgm
 
-pgmname = datapath + filename + "labels.pgm";
+pgmname = datapath + filename + "_labels.pgm";
 pgmmat = transpose(getreg(pgmname));
 yxsize = readyxsize(pgmname);
 rows = yxsize(2);
@@ -75,6 +75,12 @@ resi = zeros(out_num,1);
 for i = 1:out_num
     resi(i) = Residuals_ellipse(arc_points{i,1},output(i,:));
 end
+
+%% frame
+
+frames = cell(1,10);
+frames{1} = frame(arc_points, output);
+
 %% Yan's own word
 
 % [u,s,~]=svd(cor);

@@ -138,7 +138,7 @@ end % end the main loop
 %    rotate back to the original system
 XYproj = XYproj*Q';
 XYproj = [XYproj(:,1)+Center(1) XYproj(:,2)+Center(2)];
-RSS = norm(XY-XYproj,'fro')^2;
+RSS = norm(XY-XYproj,'fro');
 RSS = RSS/size(XY,1);
 end   % Residuals_ellipse
 

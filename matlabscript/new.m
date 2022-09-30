@@ -4,12 +4,13 @@
 % @Last Modified time: 2022-09-28 21:55:25
 %% svd
 
-[u,s,v]=svd(cor);
+[u,s,~]=svd(cor);
 R = (u*s^(1/2));
-u-v'
-
+% u = v
+s_v = diag(s);
+plot(s_v)
 %% kmeans
-k = floor(out_num/2);
+k = floor(8);
 [ind,~,sumd] = kmeans(R,k);
 [~,I]=sort(ind);
 newcor = cor(I,I);
@@ -25,8 +26,6 @@ for i = 1:k
         end
         new_elli(i,:)=fit_ellipse(new_points{i,1}(:,1),new_points{i,1}(:,2));
     catch err
-%         disp(err.identifier)
-%         disp(lw = lastwarn)
         wr_new_points = cell(length(group),2);
         new_elli(i,:)=[nan,nan,nan,nan,nan];
         new_points{i,1} = [];
@@ -47,11 +46,13 @@ new_points(tmp_cell_empty(:,1),:)=[];
 tmp_ma_empty = isnan(new_elli);
 new_elli(tmp_ma_empty(:,1),:)=[];
 
-new_num = size(new_elli,1);
-new_resi = zeros(new_num,1);
-for i = 1:new_num
-    new_resi(i) = Residuals_ellipse(new_points{i,1},new_elli(i,:));
-end
+frames{2} = frame(new_points, new_elli);
+
+% new_num = size(new_elli,1);
+% new_resi = zeros(new_num,1);
+% for i = 1:new_num
+%     new_resi(i) = Residuals_ellipse(new_points{i,1},new_elli(i,:));
+% end
 
 
 %% calculate erros
