@@ -21,3 +21,4 @@ build/
 debug/
 *.slxc
 .vscode/**
+**/*.dSYM/**
