@@ -47,7 +47,7 @@ tolerance = 1e-9;
 if abs((Axes(1)-Axes(2))/Axes(1))<tolerance
     phiall = angle(XY(:,1)-Center(1) + sqrt(-1)*(XY(:,2)-Center(2)));
     XYproj = [Axes(1)*cos(phiall)+Center(1) Axes(2)*sin(phiall)+Center(2)];
-    RSS = norm(XY-XYproj,'fro')^2;
+    RSS = sum(matfun(@norm,XY-XYproj,2))/size(XY,1);
     return;
 end
 
@@ -138,23 +138,22 @@ end % end the main loop
 %    rotate back to the original system
 XYproj = XYproj*Q';
 XYproj = [XYproj(:,1)+Center(1) XYproj(:,2)+Center(2)];
-RSS = norm(XY-XYproj,'fro');
-RSS = RSS/size(XY,1);
+RSS = sum(matfun(@norm,XY-XYproj,2))/size(XY,1);
 end   % Residuals_ellipse
 
 %     Copyright (c) 2010, Hui Ma
 %     All rights reserved.
-%     
+%
 %     Redistribution and use in source and binary forms, with or without
 %     modification, are permitted provided that the following conditions are
 %     met:
-%     
+%
 %         * Redistributions of source code must retain the above copyright
 %           notice, this list of conditions and the following disclaimer.
 %         * Redistributions in binary form must reproduce the above copyright
 %           notice, this list of conditions and the following disclaimer in
 %           the documentation and/or other materials provided with the distribution
-%     
+%
 %     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 %     AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 %     IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
