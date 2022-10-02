@@ -1,7 +1,7 @@
 % @Author: WU Zihan
 % @Date:   2022-10-01 20:52:47
 % @Last Modified by:   WU Zihan
-% @Last Modified time: 2022-10-01 21:39:59
+% @Last Modified time: 2022-10-02 22:44:39
 classdef rawArc
     %RAWARC elsdc results arranged here
     %   Detailed explanation goes here
@@ -31,6 +31,7 @@ classdef rawArc
                 end
 
             end
+
             obj.cor = cor;
             arc_names = out_ellipse(:, 1);
 
@@ -50,7 +51,7 @@ classdef rawArc
                 pureLabel = zeros(rows, cols);
                 tmp_pgm = pgmmat == arc_names(i);
                 pureLabel(tmp_pgm) = 1;
-                mat(:, :, i) = bwskel(imbinarize(pureLabel), 'MinBranchLength', floor(sum(sum(tmp_pgm))/10));
+                mat(:, :, i) = bwskel(imbinarize(pureLabel), 'MinBranchLength', floor(sum(sum(tmp_pgm)) / 10));
             end
 
             arc_points = cell(out_num, 1);
