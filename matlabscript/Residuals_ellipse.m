@@ -1,31 +1,31 @@
 % @Author: WU Zihan
 % @Date:   2022-09-26 16:33:39
 % @Last Modified by:   WU Zihan
-% @Last Modified time: 2022-10-01 20:08:47
+% @Last Modified time: 2022-10-02 11:04:37
 function [RSS, XYproj] = Residuals_ellipse(XY, ParG)
-% ! changed to adapt coordinates of image
-%   Projecting a given set of points onto an ellipse
-%   and computing the distances from the points to the ellipse
-%
-%   This is a modified version of an iterative algorithm published by D. Eberly
-%     Internet publication: "Distance from a point to an ellipse in 2D" (2004)
-%                           Geometric Tools, LLC, www.geometrictools.com
-%     Book publication: "3D Game Engine Design", 2nd edition.
-%                       Morgan Kaufmann Publishers, San Francisco, CA, 2007.
-%                              (see Section 14.13.1)
-%
-%   Input:  XY(n,2) is the array of coordinates of n points x(i)=XY(i,1), y(i)=XY(i,2)
-%           ParG is a vector 5x1 of the ellipse parameters
-%           ParG =  [Center(1:2), Axes(1:2), Angle]'
-%                Center - the coordinates of the ellipse's center
-%                Axes   - the axes (major, minor)
-%                Angle  - the angle of tilt of the ellipse
-%
-%   Output:  RSS is the Residual Sum of Squares (the sum of squares of the distances)
-%            XYproj is the array of coordinates of projections
-%
-%   The algorithm is proven to converge and reaches an accuracy of 7-8 significant digit
-%   It takes 4-5 iterations per point, on average.
+    % ! changed to adapt coordinates of image
+    %   Projecting a given set of points onto an ellipse
+    %   and computing the distances from the points to the ellipse
+    %
+    %   This is a modified version of an iterative algorithm published by D. Eberly
+    %     Internet publication: "Distance from a point to an ellipse in 2D" (2004)
+    %                           Geometric Tools, LLC, www.geometrictools.com
+    %     Book publication: "3D Game Engine Design", 2nd edition.
+    %                       Morgan Kaufmann Publishers, San Francisco, CA, 2007.
+    %                              (see Section 14.13.1)
+    %
+    %   Input:  XY(n,2) is the array of coordinates of n points x(i)=XY(i,1), y(i)=XY(i,2)
+    %           ParG is a vector 5x1 of the ellipse parameters
+    %           ParG =  [Center(1:2), Axes(1:2), Angle]'
+    %                Center - the coordinates of the ellipse's center
+    %                Axes   - the axes (major, minor)
+    %                Angle  - the angle of tilt of the ellipse
+    %
+    %   Output:  RSS is the Residual Sum of Squares (the sum of squares of the distances)
+    %            XYproj is the array of coordinates of projections
+    %
+    %   The algorithm is proven to converge and reaches an accuracy of 7-8 significant digit
+    %   It takes 4-5 iterations per point, on average.
 
     Center(1) = ParG(2);
     Center(2) = ParG(1);
@@ -121,10 +121,10 @@ function [RSS, XYproj] = Residuals_ellipse(XY, ParG)
                 PP1 = (ua / Taa)^2;
                 PP2 = (vb / Tbb)^2;
                 F = PP1 + PP2 - 1;
-                if F < 0; break; end;
+                if F < 0; break; end
                 Fder = 2 * (PP1 / Taa + PP2 / Tbb);
                 Ratio = F / Fder;
-                if (Ratio < tol_aa); break; end;
+                if (Ratio < tol_aa); break; end
                 T = T + Ratio;
             end
 
@@ -139,7 +139,8 @@ function [RSS, XYproj] = Residuals_ellipse(XY, ParG)
         XYproj = XYproj * Q';
         XYproj = [XYproj(:, 1) + Center(1) XYproj(:, 2) + Center(2)];
     end
-    RSS = sum(matfun(@norm, XY - XYproj, 2).^2) / size(XY, 1)/norm(Axes);
+
+    RSS = sum(matfun(@norm, XY - XYproj, 2).^2) / size(XY, 1) / norm(Axes);
 
 end % Residuals_ellipse
 
