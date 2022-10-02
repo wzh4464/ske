@@ -1,8 +1,8 @@
 % @Author: WU Zihan
 % @Date:   2022-10-01 19:32:26
 % @Last Modified by:   WU Zihan
-% @Last Modified time: 2022-10-01 21:45:42
-function newframe = coclusterFrame(frames, k, ptr, R)
+% @Last Modified time: 2022-10-02 11:47:14
+function newframe = coclusterFrame(frames, k, ptr, R, arcs)
 % k is k means argument
 % ptr is source frame
 [ind,~,~] = kmeans(R,k);
@@ -40,5 +40,5 @@ new_points(tmp_cell_empty(:,1),:)=[];
 tmp_ma_empty = isnan(new_elli);
 new_elli(tmp_ma_empty(:,1),:)=[];
 
-newframe = frame(new_points, new_elli);
+newframe = frame(arcs, new_elli, {new_points{:,1}}, {new_points{:,2}});
 end
