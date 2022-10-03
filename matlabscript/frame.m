@@ -1,8 +1,8 @@
 % @Author: WU Zihan
 % @Date:   2022-09-30 16:26:35
 % @Last Modified by:   WU Zihan
-% @Last Modified time: 2022-10-02 22:43:33
-classdef frame < matlab.mixin.Copyable
+% @Last Modified time: 2022-10-04 01:11:12
+classdef frame < handle
     %FRAME current status for caluculation
     %   Detailed explanation goes here
 
@@ -15,6 +15,7 @@ classdef frame < matlab.mixin.Copyable
         group
         ANum
         cor
+        ratio
     end
 
     methods
@@ -66,15 +67,14 @@ classdef frame < matlab.mixin.Copyable
             end
 
             obj.ANum = size(obj.elli, 1);
-            obj.residue = zeros(obj.ANum, 1);
-
-            for i = 1:obj.ANum
-
-                obj.residue(i) = Residuals_ellipse(obj.points{i}, obj.elli(i, :));
-
-            end
+            obj.calculateResidue();
 
             obj.res_sum = obj.resSum();
+            % unique the points read
+            for i = 1:obj.ANum
+                obj.points{i} = unique(obj.points{i}, "row");
+            end
+            obj.ratio = obj.calculateRatio();
 
         end
 
@@ -115,6 +115,74 @@ classdef frame < matlab.mixin.Copyable
 
         function showAllElli(obj)
             drawEllipseandShow(obj.elli', obj.sourceimg);
+        end
+
+        function obj = dropSmallArcs(obj, threshold)
+            %dropSmallArcs - the last step
+            %
+            % Syntax: frame = dropSmallArcs(obj, threshold)
+            %
+            % if the ellipse's angle is too small, it is highly probable to be a wrong one
+            if ~exist ('threshold', 'var')
+                threshold = 0.01;
+            end
+
+            j = 0;
+
+            for i = 1:obj.ANum
+                j = j + 1;
+                ratio = size(obj.points{j}, 2) / (obj.elli(j, 3) + obj.elli(j, 4));
+                if  ratio < threshold
+                    ratio
+                    obj.ANum = obj.ANum - 1;
+                    obj.elli(j, :) = [];
+                    obj.points{j} = [];
+                    obj.group{j} = [];
+                    j = j - 1;
+                end
+
+            end
+
+            obj.calculateResidue();
+            obj.res_sum = obj.resSum();
+            obj.cor = zeros(obj.ANum);
+
+            for i = 1:obj.ANum
+
+                for j = 1:obj.ANum
+                    obj.cor(i, j) = iou(obj.elli(i, :), obj.elli(j, :));
+                end
+
+            end
+
+        end
+
+        function calculateResidue(obj)
+            %calculateResidue - as title
+            %
+            % Syntax: calculateResidue(obj)
+            %
+            % As title
+            obj.residue = zeros(obj.ANum, 1);
+
+            for i = 1:obj.ANum
+
+                obj.residue(i) = Residuals_ellipse(obj.points{i}, obj.elli(i, :));
+
+            end
+
+        end
+
+        function ratio = calculateRatio(obj)
+        %calculateRatio - Description
+        %
+        % Syntax: ratio = calculateRatio(obj)
+        %
+        % Long description
+            ratio = zeros(1,obj.ANum);
+            for j=1:obj.ANum
+                ratio(j) = size(obj.points{j}, 2) / (obj.elli(j, 3) + obj.elli(j, 4));
+            end
         end
 
     end
