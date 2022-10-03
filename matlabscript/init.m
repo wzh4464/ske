@@ -6,9 +6,15 @@
 clear;
 clc;
 
+% set random seeds
+globalStream = RandStream('mlfg6331_64','NormalTransform','Polar');
+RandStream.setGlobalStream(globalStream);
+
+% set source files
 datapath = matlab.project.rootProject().RootFolder + "/ELSDc/Dataset4_mydataset/";
 filename = "666";
 
+% generate frame from elsdc
 arcs = rawArc(datapath, filename);
 frames = cell(10, 1);
 frames{1} = frame(arcs);
@@ -35,3 +41,48 @@ frames{1} = frame(arcs);
 % disp(find(testframe.residue-frames{1}.residue < 0));
 % a = testframe.residue(testframe.residue-frames{1}.residue < 0);
 % b = frames{1}.residue(testframe.residue-frames{1}.residue < 0);
+
+%% svd
+
+[u, s, ~] = svd(arcs.cor);
+R = (u * s^(1/2));
+% u = v
+% s_v = diag(s);
+% plot(s_v)
+%% kmeans
+k = 16;
+frames{2} = coclusterFrame(frames{1}, k);
+k = 8;
+frames{3} = coclusterFrame(frames{2}, k);
+%%
+% kframes = cell(27,1);
+% resi = zeros(27,1);
+% for i = 27:-1:1
+%     kframes{i} = coclusterFrame(frames{1},i,R);
+%     resi(i) = kframes{i}.res_sum;
+% end
+
+% %%
+% k = 5;
+% for i = 1:k
+%     kframes{k}.showEllipse(i,sourceimg);
+% end
+
+%% compare
+% preFrame = frames{1};
+% postFrame = frames{2};
+% comp = zeros(length(postFrame.group), 2);
+% 
+% for i = 1:length(postFrame.group)
+%     comp(i, 1) = frameResGroup(preFrame, postFrame.group{i});
+%     comp(i, 2) = postFrame.residue(i);
+% end
+
+%% show all comparations
+k = 3;
+for i = 1:frames{3}.ANum
+    frames{3}.comparePaE(i);
+end
+
+% 13 bad
+% consider length weight

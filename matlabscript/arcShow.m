@@ -5,13 +5,6 @@
 function arcShow(k, img, points)
     %ARCSHOW show arcpoints quickly
     %   k is out of out_num
-    if ~exist("img", 'var')
-        img = imread(sourceimg);
-    end
-
-    if ~exist("points", 'var')
-        points = arc_points;
-    end
 
     figure
     imshow(img);
