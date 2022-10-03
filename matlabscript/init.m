@@ -1,7 +1,7 @@
 % @Author: WU Zihan
 % @Date:   2022-10-01 17:14:22
 % @Last Modified by:   WU Zihan
-% @Last Modified time: 2022-10-02 22:43:57
+% @Last Modified time: 2022-10-04 00:56:13
 %% loading
 clear;
 clc;
@@ -54,6 +54,11 @@ k = 16;
 frames{2} = coclusterFrame(frames{1}, k);
 k = 8;
 frames{3} = coclusterFrame(frames{2}, k);
+k = 4;
+frames{4} = coclusterFrame(frames{3}, k);
+k = 2;
+frames{5} = coclusterFrame(frames{4}, k);
+frames{5}.dropSmallArcs();
 %%
 % kframes = cell(27,1);
 % resi = zeros(27,1);
@@ -79,10 +84,10 @@ frames{3} = coclusterFrame(frames{2}, k);
 % end
 
 %% show all comparations
-k = 3;
-for i = 1:frames{3}.ANum
-    frames{3}.comparePaE(i);
+k = 5;
+for i = 1:frames{k}.ANum
+    frames{k}.comparePaE(i);
 end
 
-% 13 bad
 % consider length weight
+% if length is too short at last, drop it
