@@ -2,14 +2,14 @@
 % @Date:   2022-10-01 19:32:26
 % @Last Modified by:   WU Zihan
 % @Last Modified time: 2022-10-02 22:42:54
-function newframe = coclusterFrame(cframe, k, R, tolerence)
+function newframe = coclusterFrame(cframe, k, tolerence)
 
     if ~exist('tolerence', 'var')
         tolerence = 1;
     end
 
     % k is k means argument
-    [ind, ~, ~] = kmeans(R, k);
+    [ind, ~, ~] = kmeans(cframe.cor, k, 'Start','uniform','Display','iter');
     % [~,I]=sort(ind);
     % newcor = cor(I,I);
     % k = max(ind);
