@@ -1,8 +1,8 @@
 % @Author: WU Zihan
 % @Date:   2022-09-30 16:26:35
 % @Last Modified by:   WU Zihan
-% @Last Modified time: 2022-10-04 01:11:12
-classdef frame < handle
+% @Last Modified time: 2022-10-04 22:35:23
+classdef frame < matlab.mixin.Copyable
     %FRAME current status for caluculation
     %   Detailed explanation goes here
 
@@ -74,6 +74,7 @@ classdef frame < handle
             for i = 1:obj.ANum
                 obj.points{i} = unique(obj.points{i}, "row");
             end
+
             obj.ratio = obj.calculateRatio();
 
         end
@@ -117,27 +118,34 @@ classdef frame < handle
             drawEllipseandShow(obj.elli', obj.sourceimg);
         end
 
-        function obj = dropSmallArcs(obj, threshold)
+        function obj = dropSmallArcs(obj, threshold_ratio, threshold_e)
             %dropSmallArcs - the last step
             %
-            % Syntax: frame = dropSmallArcs(obj, threshold)
+            % Syntax: frame = dropSmallArcs(obj, threshold_ratio)
             %
             % if the ellipse's angle is too small, it is highly probable to be a wrong one
-            if ~exist ('threshold', 'var')
-                threshold = 0.01;
+            % if e is too big, it's also a wrong one
+            % well it's not actually e, but b/a
+            if ~exist ('threshold_ratio', 'var')
+                threshold_ratio = 1;
+            end
+
+            if ~exist ('threshold_e', 'var')
+                threshold_e = 0.1;
             end
 
             j = 0;
 
             for i = 1:obj.ANum
                 j = j + 1;
-                ratio = size(obj.points{j}, 2) / (obj.elli(j, 3) + obj.elli(j, 4));
-                if  ratio < threshold
-                    ratio
+
+                if (obj.ratio(j) < threshold_ratio) || ((obj.elli(j, 4) / obj.elli(j, 3)) < threshold_e)
+                    % fprintf("j = %d\nratio = %f\n",j,obj.ratio(j));
                     obj.ANum = obj.ANum - 1;
                     obj.elli(j, :) = [];
-                    obj.points{j} = [];
+                    obj.points(j) = [];
                     obj.group{j} = [];
+                    obj.ratio(j) = [];
                     j = j - 1;
                 end
 
@@ -174,15 +182,17 @@ classdef frame < handle
         end
 
         function ratio = calculateRatio(obj)
-        %calculateRatio - Description
-        %
-        % Syntax: ratio = calculateRatio(obj)
-        %
-        % Long description
-            ratio = zeros(1,obj.ANum);
-            for j=1:obj.ANum
-                ratio(j) = size(obj.points{j}, 2) / (obj.elli(j, 3) + obj.elli(j, 4));
+            %calculateRatio - Description
+            %
+            % Syntax: ratio = calculateRatio(obj)
+            %
+            % Long description
+            ratio = zeros(1, obj.ANum);
+
+            for j = 1:obj.ANum
+                ratio(j) = size(obj.points{j}, 1) / (obj.elli(j, 3) + obj.elli(j, 4));
             end
+
         end
 
     end

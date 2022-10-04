@@ -1,7 +1,7 @@
 % @Author: WU Zihan
 % @Date:   2022-10-01 19:32:26
 % @Last Modified by:   WU Zihan
-% @Last Modified time: 2022-10-04 00:29:51
+% @Last Modified time: 2022-10-05 00:15:37
 function newframe = coclusterFrame(cframe, k, tolerence)
 
     if ~exist('tolerence', 'var')
@@ -15,7 +15,7 @@ function newframe = coclusterFrame(cframe, k, tolerence)
     % k = max(ind);
     new_elli = zeros(k, 5);
     new_points = cell(k, 2);
-    fprintf("k = %d\n",k)
+    % fprintf("k = %d\n",k)
     for i = 1:k
         group = find(ind == i);
 
@@ -31,14 +31,14 @@ function newframe = coclusterFrame(cframe, k, tolerence)
 
             if r > tolerence
                 [new_elli, new_points] = dealDropped(new_points, i, cframe, group, new_elli);
-                fprintf("i = %d\n", i)
-                fprintf("big tolenrce: %d\n", r)
+                % fprintf("i = %d\n", i)
+                % fprintf("big tolenrce: %d\n", r)
             end
 
         catch
             [new_elli, new_points] = dealDropped(new_points, i, cframe, group, new_elli);
-            fprintf("i = %d\n", i)
-            fprintf("Not an ellipse.\n")
+            % fprintf("i = %d\n", i)
+            % fprintf("Not an ellipse.\n")
         end
 
         % 应该分组后检查error 然后观察分组是否合理, 避免新fit出现错误值

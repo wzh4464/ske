@@ -1,7 +1,7 @@
 % @Author: WU Zihan
 % @Date:   2022-10-01 17:14:22
 % @Last Modified by:   WU Zihan
-% @Last Modified time: 2022-10-04 00:56:13
+% @Last Modified time: 2022-10-05 00:01:02
 %% loading
 clear;
 clc;
@@ -13,6 +13,7 @@ RandStream.setGlobalStream(globalStream);
 % set source files
 datapath = matlab.project.rootProject().RootFolder + "/ELSDc/Dataset4_mydataset/";
 filename = "666";
+sourceimg = datapath + filename + '.pgm';
 
 % generate frame from elsdc
 arcs = rawArc(datapath, filename);
@@ -59,6 +60,8 @@ frames{4} = coclusterFrame(frames{3}, k);
 k = 2;
 frames{5} = coclusterFrame(frames{4}, k);
 frames{5}.dropSmallArcs();
+
+drawEllipseandShow(frames{5}.elli',frames{5}.sourceimg);
 %%
 % kframes = cell(27,1);
 % resi = zeros(27,1);
@@ -84,10 +87,10 @@ frames{5}.dropSmallArcs();
 % end
 
 %% show all comparations
-k = 5;
-for i = 1:frames{k}.ANum
-    frames{k}.comparePaE(i);
-end
+% k = 5;
+% for i = 1:frames{k}.ANum
+%     frames{k}.comparePaE(i);
+% end
 
 % consider length weight
 % if length is too short at last, drop it
