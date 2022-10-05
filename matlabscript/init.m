@@ -1,13 +1,13 @@
 % @Author: WU Zihan
 % @Date:   2022-10-01 17:14:22
 % @Last Modified by:   WU Zihan
-% @Last Modified time: 2022-10-05 00:01:02
+% @Last Modified time: 2022-10-05 00:31:26
 %% loading
 clear;
 clc;
 
 % set random seeds
-globalStream = RandStream('mlfg6331_64','NormalTransform','Polar');
+globalStream = RandStream('mlfg6331_64', 'NormalTransform', 'Polar');
 RandStream.setGlobalStream(globalStream);
 
 % set source files
@@ -61,7 +61,7 @@ k = 2;
 frames{5} = coclusterFrame(frames{4}, k);
 frames{5}.dropSmallArcs();
 
-drawEllipseandShow(frames{5}.elli',frames{5}.sourceimg);
+drawEllipseandShow(frames{5}.elli', frames{5}.sourceimg);
 %%
 % kframes = cell(27,1);
 % resi = zeros(27,1);
@@ -80,7 +80,7 @@ drawEllipseandShow(frames{5}.elli',frames{5}.sourceimg);
 % preFrame = frames{1};
 % postFrame = frames{2};
 % comp = zeros(length(postFrame.group), 2);
-% 
+%
 % for i = 1:length(postFrame.group)
 %     comp(i, 1) = frameResGroup(preFrame, postFrame.group{i});
 %     comp(i, 2) = postFrame.residue(i);
