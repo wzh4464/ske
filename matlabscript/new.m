@@ -14,4 +14,7 @@ datapath = matlab.project.rootProject().RootFolder + "/ELSDc/Dataset4_mydataset/
 filename = "overlap";
 
 % bad points id(30) = 45
-elli = GenElli(datapath, filename, '.pgm');
+[elli,framecl] = GenElli(datapath, filename, '.pgm');
+%%
+arcs = rawArc(datapath, filename, '.pgm');
+cframe = frame(arcs);
