@@ -19,23 +19,29 @@ classdef rawArc
         function obj = rawArc(datapath, filename, postfix)
             %RAWARC Construct an instance of this class
             if ~exist('postfix', 'var')
-                postfix = '.pgm';
+                postfix = ".pgm";
             end
             obj.sourceimg = datapath + filename + postfix;
-            out_ellipse = load(datapath + filename + "_out_ellipse.txt");
-            output = out_ellipse(:, 6:10);
+            % obj.sourceimg is a char
+            obj.sourceimg = char(obj.sourceimg);
+            % out_ellipse = load(datapath + filename + "_out_ellipse.txt");
+            % output = out_ellipse(:, 6:10);
+            
+            [output, arc_names, pgmmat]=mexELSDc(obj.sourceimg);
+            % arc_names = out_ellipse(:, 1);
             out_num = size(output, 1);
-
-            arc_names = out_ellipse(:, 1);
-
             % read points from pgm
 
-            pgmname = datapath + filename + "_labels.pgm";
-            pgmmat = transpose(getreg(pgmname));
-            yxsize = readyxsize(pgmname);
-            rows = yxsize(2);
-            cols = yxsize(1);
-            pgmmat = transpose(reshape(pgmmat, [cols, rows]));
+            % pgmname = datapath + filename + "_labels.pgm";
+            % pgmmat = transpose(getreg(pgmname));
+            rows = size(pgmmat,1);
+            cols = size(pgmmat,2);
+
+            pgmmax = max(max(pgmmat));
+            pgmshow = double(pgmmat)/double(pgmmax);
+            imshow(pgmshow);
+
+            % pgmmat = transpose(reshape(pgmmat, [cols, rows]));
 
             mat = zeros(rows, cols, out_num);
             mat = imbinarize(mat);
@@ -74,7 +80,7 @@ classdef rawArc
             for i = 1:out_num
 
                 for j = 1:out_num
-                    cor(i, j) = iou(output(i, :), output(j, :));
+                    cor(i, j) = iou(output(i, 1:5), output(j, 1:5));
                 end
 
             end
