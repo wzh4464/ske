@@ -13,7 +13,7 @@ RandStream.setGlobalStream(globalStream);
 % set source files
 datapath = matlab.project.rootProject().RootFolder + "/ELSDc/Dataset4_mydataset/";
 filename = "666";
-sourceimg = datapath + filename + '.pgm';
+sourceimg = datapath + filename + ".pgm";
 
 % generate frame from elsdc
 arcs = rawArc(datapath, filename);

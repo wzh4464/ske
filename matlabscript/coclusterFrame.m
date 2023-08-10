@@ -9,7 +9,7 @@ function newframe = coclusterFrame(cframe, k, tolerence)
     end
 
     % k is k means argument
-    [u,s,V]=cframe.cor;
+    [u,s,V]=svd(cframe.cor);
     [ind, ~, ~] = kmeans(u*s^(1/2), k); 
     % [~,I]=sort(ind);
     % newcor = cor(I,I);
