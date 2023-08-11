@@ -27,14 +27,17 @@ function newframe = coclusterFrame(cframe, k, tolerence)
     new_points = cell(k, 2);
     % fprintf("k = %d\n",k)
     for i = 1:k
+        % group is that which arcs (in ell_matrix) are from class i
         group = find(ind == i);
+        ngroup = ind == i;
+        
+        group_originLabel = cframe.index(group);
+        ngroup_originLabel = cframe.index(ngroup);
+
+        new_points{i, 1} = vertcat(cframe.points{ngroup, 1});
+        new_points{i, 2} = vertcat(group);
 
         try
-
-            for j = 1:length(group)
-                new_points{i, 1} = [new_points{i, 1}; cframe.points{group(j), 1}];
-                new_points{i, 2} = [new_points{i, 2}; group(j)];
-            end
 
             new_elli(i, :) = fit_ellipse(new_points{i, 1}(:, 1), new_points{i, 1}(:, 2));
             r = Residuals_ellipse(new_points{i, 1}, new_elli(i, :));
