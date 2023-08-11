@@ -12,6 +12,7 @@ classdef rawArc
         id
         sourceimg
         cor
+        label
     end
 
     methods
@@ -28,6 +29,7 @@ classdef rawArc
             % output = out_ellipse(:, 6:10);
             
             [output, arc_names, pgmmat]=mexELSDc(obj.sourceimg);
+            obj.label = arc_names;
             % arc_names = out_ellipse(:, 1);
             out_num = size(output, 1);
             % read points from pgm

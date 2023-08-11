@@ -4,16 +4,25 @@
 % @Last Modified time: 2022-10-05 00:15:37
 function newframe = coclusterFrame(cframe, k, tolerence)
 
+    % This function takes a co-clustering frame and returns a new frame with the same points but with the ellipses fit to the points in each row and column replaced by a single ellipse fit to all the points in the row or column.
+    %
+    % Inputs:
+    %   - cframe: a co-clustering frame
+    %   - k: the number of clusters to use in k-means clustering
+    %   - tolerence: the tolerence for the residual of the ellipse fit
+    %
+    % Outputs:
+    %   - newframe: a new frame with the same points but with the ellipses fit to the points in each row and column replaced by a single ellipse fit to all the points in the row or column
+    
     if ~exist('tolerence', 'var')
+        % third parameter does not exist, so default it to 1.
         tolerence = 1;
     end
 
-    % k is k means argument
-    [u,s,V]=svd(cframe.cor);
-    [ind, ~, ~] = kmeans(u*s^(1/2), k); 
-    % [~,I]=sort(ind);
-    % newcor = cor(I,I);
-    % k = max(ind);
+
+    [u,s,~]=svd(cframe.cor);
+    [ind, ~, ~] = kmeans(u*s, k); 
+
     new_elli = zeros(k, 5);
     new_points = cell(k, 2);
     % fprintf("k = %d\n",k)
@@ -31,13 +40,14 @@ function newframe = coclusterFrame(cframe, k, tolerence)
             r = Residuals_ellipse(new_points{i, 1}, new_elli(i, :));
 
             if r > tolerence
-                [new_elli, new_points] = dealDropped(new_points, i, cframe, group, new_elli);
+                [new_elli, new_points, new_group] = dealDropped(new_points, i, cframe, group, new_elli);
+
                 % fprintf("i = %d\n", i)
                 % fprintf("big tolenrce: %d\n", r)
             end
 
         catch
-            [new_elli, new_points] = dealDropped(new_points, i, cframe, group, new_elli);
+            [new_elli, new_points, new_group] = dealDropped(new_points, i, cframe, group, new_elli);
             % fprintf("i = %d\n", i)
             % fprintf("Not an ellipse.\n")
         end
@@ -46,16 +56,30 @@ function newframe = coclusterFrame(cframe, k, tolerence)
         % 还有可以label里不用bwskel, 而是用OUTPUT里和他重合的点 !!!
     end
 
+    % remove empty cells
     tmp_cell_empty = cellfun(@isempty, new_points);
     new_points(tmp_cell_empty(:, 1), :) = [];
 
+    % remove empty rows
     tmp_ma_empty = isnan(new_elli);
     new_elli(tmp_ma_empty(:, 1), :) = [];
 
-    newframe = frame(new_elli, new_points(:, 1), new_points(:, 2), cframe.sourceimg);
+    newframe = frame(new_elli, new_points(:, 1), new_points(:, 2), cframe.sourceimg, cframe.index);
 end
 
-function [new_elli, new_points] = dealDropped(new_points, i, frame, group, new_elli)
+% This function deals with dropped points in a co-clustering frame by removing them from the new_points cell array and setting the corresponding row in new_elli to NaN. It then adds the remaining points to a new cell array and appends the corresponding ellipses to new_elli. The updated new_points and new_elli are returned.
+%
+% Inputs:
+%   - new_points: a cell array containing the points in the co-clustering frame
+%   - i: the index of the dropped point
+%   - frame: the co-clustering frame
+%   - group: a vector containing the indices of the remaining points in the same row or column as the dropped point
+%   - new_elli: a matrix containing the ellipses in the co-clustering frame
+%
+% Outputs:
+%   - new_elli: the updated matrix of ellipses
+%   - new_points: the updated cell array of points
+function [new_elli, new_points, new_group] = dealDropped(new_points, i, frame, group, new_elli)
     wr_new_points = cell(length(group), 2);
     new_points{i, 1} = [];
     new_points{i, 2} = [];
@@ -68,4 +92,7 @@ function [new_elli, new_points] = dealDropped(new_points, i, frame, group, new_e
     end
 
     new_points = [new_points; wr_new_points];
+    fprintf("%d st arc dropped.\n", i);
+    % new_group is group without the dropped arc
+    new_group = group(group ~= i);
 end

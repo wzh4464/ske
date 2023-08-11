@@ -16,6 +16,7 @@ classdef frame < matlab.mixin.Copyable
         ANum
         cor
         ratio
+        index % index gives the group label of the arcs
     end
 
     methods
@@ -24,7 +25,7 @@ classdef frame < matlab.mixin.Copyable
             %FRAME Construct an instance of this class
             %   raw_arc, elli, points, ind
 
-            if nargin == 1
+            if nargin == 1 % raw_arc 
 
                 raw_arc = varargin{1};
                 num = length(raw_arc.id);
@@ -38,9 +39,12 @@ classdef frame < matlab.mixin.Copyable
                     obj.group{i} = i;
                 end
 
+                obj.index = raw_arc.label;
+
+
             else
 
-                if nargin == 4 % elli, points, group, sourceimg
+                if nargin == 5 % elli, points, group, sourceimg, ind
                     obj.elli = varargin{1};
                     obj.points = varargin{2};
                     % group = varargin{4};
@@ -50,6 +54,7 @@ classdef frame < matlab.mixin.Copyable
                     %     obj.group{i} = find(ind==i);
                     % end
                     obj.sourceimg = varargin{4};
+                    obj.index = varargin{5};
 
                     out_num = size(obj.elli, 1);
                     obj.cor = zeros(out_num);
