@@ -149,7 +149,7 @@ classdef frame < matlab.mixin.Copyable
                     obj.ANum = obj.ANum - 1;
                     obj.elli(j, :) = [];
                     obj.points(j) = [];
-                    obj.group{j} = [];
+                    obj.group{i} = [];
                     obj.ratio(j) = [];
                     j = j - 1;
                 end
