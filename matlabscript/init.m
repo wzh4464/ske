@@ -17,7 +17,7 @@ sourceimg = datapath + filename + ".pgm";
 
 % generate frame from elsdc
 arcs = rawArc(datapath, filename);
-frames = cell(10, 1);
+frames = cell(5, 1);
 frames{1} = frame(arcs);
 
 %% ? need refit
