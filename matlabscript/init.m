@@ -11,8 +11,8 @@ globalStream = RandStream('mlfg6331_64', 'NormalTransform', 'Polar');
 RandStream.setGlobalStream(globalStream);
 
 % set source files
-datapath = matlab.project.rootProject().RootFolder + "/ELSDc/Dataset4_mydataset/";
-filename = "666";
+datapath = matlab.project.rootProject().RootFolder + "/toPGM/resource/";
+filename = "overlap";
 sourceimg = datapath + filename + ".pgm";
 
 % generate frame from elsdc
