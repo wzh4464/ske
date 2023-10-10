@@ -6,13 +6,15 @@
 clear;
 clc;
 
-% set random seeds
-globalStream = RandStream('mlfg6331_64', 'NormalTransform', 'Polar');
-RandStream.setGlobalStream(globalStream);
-
-% set source files
-datapath = matlab.project.rootProject().RootFolder + "/toPGM/resource/";
-filename = "overlap";
+% % set random seeds
+% globalStream = RandStream('mlfg6331_64', 'NormalTransform', 'Polar');
+% RandStream.setGlobalStream(globalStream);
+% 
+% % set source files
+% datapath = matlab.project.rootProject().RootFolder + "/sourceimg/denseElli/";
+% datapath = "../sourceimg/denseElli/pgm/";
+datapath = "../ELSDc/Dataset2_CalibrationPatterns/images/ring3img3";
+filename = "ring3img3";
 sourceimg = datapath + filename + ".pgm";
 
 % generate frame from elsdc
@@ -51,15 +53,15 @@ R = (u * s^(1/2));
 % s_v = diag(s);
 % plot(s_v)
 %% kmeans
-k = 16;
+k = 50;
 frames{2} = coclusterFrame(frames{1}, k);
-k = 8;
+k = 50;
 frames{3} = coclusterFrame(frames{2}, k);
-k = 4;
+k = 50;
 frames{4} = coclusterFrame(frames{3}, k);
-k = 2;
+k = 25;
 frames{5} = coclusterFrame(frames{4}, k);
-frames{5}.dropSmallArcs();
+frames{5}.dropSmallArcs(0.1);
 
 drawEllipseandShow(frames{5}.elli', frames{5}.sourceimg);
 %%
