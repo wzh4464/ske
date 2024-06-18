@@ -1,3 +1,6 @@
 [submodule "ELSDc"]
 	path = ELSDc
 	url = https://github.com/wzh4464/ELSDc.git
+[submodule "npy-matlab"]
+	path = npy-matlab
+	url = https://github.com/kwikteam/npy-matlab.git
